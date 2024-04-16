@@ -7,6 +7,7 @@ const app = express()
 
 const productRoutes = require('./api/routes/products')
 const ordersRoutes = require('./api/routes/orders')
+const morgan = require('morgan')
 
 //Express 애플리케이션에 미들웨어를 추가
 //이 미들웨어는 모든 요청에 대해 실행됨
@@ -18,8 +19,31 @@ const ordersRoutes = require('./api/routes/orders')
 //         message: 'It wordks!'
 //     })
 // }) 
+app.use(morgan('dev'))
 
 app.use('/products',productRoutes)
 app.use('/orders',ordersRoutes)
+
+//새로운 오류 객체를 생성
+//이 오류는 "Not found" 메시지를 가지고 있으며, 404 상태 코드로 설정
+app.use((req,res,next)=>{
+    const error = new Error('Not found')
+    error.status = 404
+    //다음 미들웨어로 오류를 전달
+    //이를 통해 Express는 다음에 오류 처리 미들웨어로 이동
+    next(error)
+})
+
+
+app.use((error,req,res,next)=>{
+    //HTTP 응답 상태 코드를 설정
+    //만약 오류 객체에 상태 코드가 설정되어 있지 않다면 기본값으로 500 (Internal Server Error)를 사용
+    res.status(error.status || 500)
+    res.json({
+        error:{
+            message : error.message
+        }
+    })
+})
 // Express 애플리케이션 객체를 모듈로 내보냄. 이렇게 함으로써 이 파일을 다른 파일에서 require하여 Express 애플리케이션을 사용할 수 있음
 module.exports = app
