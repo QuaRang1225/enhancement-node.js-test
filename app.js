@@ -19,7 +19,6 @@ const ordersRoutes = require('./api/routes/orders')
 //     })
 // }) 
 
-
 app.use('/products',productRoutes)
 app.use('/orders',ordersRoutes)
 // Express 애플리케이션 객체를 모듈로 내보냄. 이렇게 함으로써 이 파일을 다른 파일에서 require하여 Express 애플리케이션을 사용할 수 있음
