@@ -4,7 +4,7 @@ const http = require('http')
 const app = require('./app')
 //서버를 실행할 포트 번호 설정
 //환경 변수 PORT의 값이 있으면 해당 값을 사용하고, 그렇지 않으면 기본값으로 3000을 사용
-const port = process.env.PORT || 1225
+const port = process.env.PORT || 3000
 
 //함수를 호출하여 HTTP 서버 인스턴스를 생성
 // 이 서버는 클라이언트의 요청을 수신하고 응답을 제공하는 역할을 함
