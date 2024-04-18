@@ -8,6 +8,7 @@ const app = express()
 const productRoutes = require('./api/routes/products')
 const ordersRoutes = require('./api/routes/orders')
 const morgan = require('morgan')
+const bodyParser = require('body-parser')
 
 //Express 애플리케이션에 미들웨어를 추가
 //이 미들웨어는 모든 요청에 대해 실행됨
@@ -20,6 +21,8 @@ const morgan = require('morgan')
 //     })
 // }) 
 app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.json())
 
 app.use('/products',productRoutes)
 app.use('/orders',ordersRoutes)
