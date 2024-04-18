@@ -10,6 +10,21 @@ const ordersRoutes = require('./api/routes/orders')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 
+// app.use((req,res,nest)=>{
+    // res.header("Access-Control-Allow-Origin","*")
+    // res.header(
+    //     "Access-Control-Allow-Headers",
+    //     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    // )
+    // if (req.method === 'OPTIONS'){
+    //     res.header('Access-Control-Allow-Methods','PUT, POST, PATCH, DELETE, GET')
+    //     return res.status(200).json({
+            
+    //     })
+    // }
+    // next()
+// })
+
 //Express 애플리케이션에 미들웨어를 추가
 //이 미들웨어는 모든 요청에 대해 실행됨
 //미들웨어는 요청 객체 req, 응답 객체 res, 그리고 다음 미들웨어 함수를 호출하는 콜백 함수 next를 인자로 받음
