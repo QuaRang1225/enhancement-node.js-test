@@ -12,7 +12,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb+srv://dbduddnd1225:'+ process.env.MONGO_ATLAS_PW+ '@node-rest-shop.kxjks0n.mongodb.net/')
-
+//mongoose.Promise = global.Promise
 // app.use((req,res,nest)=>{
     // res.header("Access-Control-Allow-Origin","*")
     // res.header(

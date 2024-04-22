@@ -80,7 +80,13 @@ router.get('/:productId',(req,res,next) => {
     .then(doc => {
         console.log(doc)
         if (doc){
-            res.status(200).json(doc)
+            res.status(200).json({
+                product:doc,
+                request:{
+                    type:'GET',
+                    url:'http://localhost/products'
+                }
+            })
         }else{
             res.status(404).json({message:'No valid entryu found for provided ID'})
         }
@@ -103,7 +109,13 @@ router.patch("/:productId",(req,res,next) => {
     .exec()
     .then(result => {
         console.log(result)
-        res.status(200).json(result)
+        res.status(200).json({ 
+            message:'Product updated',
+            request:{
+                type: 'PATCH',
+                url: 'http://localhost:3000/products/' + id
+            }
+        })
     })
     .catch(err => {
         console.log(err)
@@ -118,7 +130,14 @@ router.delete("/:productId",(req,res,next) => {
     .exec()
     .then(result => {
         console.log(result)
-        res.status(200).json(result)
+        res.status(200).json({ 
+            message:'Product deleted',
+            request:{
+                type: 'DELETE',
+                url: 'http://localhost:3000/products/',
+                body:{name:'String',price:'Number'}
+            }
+        })
     })
     .catch(err => {
         console.log(err)
