@@ -39,38 +39,26 @@ router.get('/',(req,res,next) => {
     })
 })
 
-router.post('/',(req,res,next) => {
-  
-    const product = new Product({
-        _id : new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price
-    })
-
-
-    product
-    .save()
-    .then(result =>{
-        console.log(result)
-        res.status(201).json({
-            message:'Created product successfully',
-            name:result.name,
-            price:result.price,
-            _id:result._id,
-            request:{
-                type: 'POST',
-                url: 'http://localhost:3000/products/' + result._id
-            }
+router.post('/', (req, res, next) => {
+    const order = new Order({
+        _id: new mongoose.Types.ObjectId(), // new ObjectId()로 변경
+        quantity: req.body.quantity,
+        product: req.body.productId
+    });
+    order
+        .save()
+        .then(result => {
+            console.log(result);
+            res.status(201).json(result); // req -> res로 수정
         })
-    })
-    .catch(err => {
-        console.log(err)
-        res.status(500).json({
-            error:err
-        })
-    })
-    
-})
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        });
+});
+
 
 router.get('/:productId',(req,res,next) => {
     const id = req.params.productId
