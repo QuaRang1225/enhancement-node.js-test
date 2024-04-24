@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
 const pokemonSchema = mongoose.Schema({
+    _id : Number,
     capture_rate : Number,
     dex_num : [],
     dex_region : [],
@@ -11,7 +12,6 @@ const pokemonSchema = mongoose.Schema({
     genra : String,
     hatch_counter : Number,
     name : String,
-    num : Int16Array,
     text_entries_text : [] ,
     text_entries_version : [] ,
     varieites : []
