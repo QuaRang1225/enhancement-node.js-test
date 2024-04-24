@@ -7,6 +7,10 @@ const app = express()
 
 const productRoutes = require('./api/routes/products')
 const ordersRoutes = require('./api/routes/orders')
+
+const pokemonRoutes = require('./Pokemon/routes/pokemons')
+const treeRoutes = require('./Pokemon/routes/evolutionTree')
+
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
@@ -44,6 +48,9 @@ app.use(bodyParser.json())
 
 app.use('/products',productRoutes)
 app.use('/orders',ordersRoutes)
+
+app.use('/pokemons',pokemonRoutes)
+app.use('/tree',treeRoutes)
 
 //새로운 오류 객체를 생성
 //이 오류는 "Not found" 메시지를 가지고 있으며, 404 상태 코드로 설정
