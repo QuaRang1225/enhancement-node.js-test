@@ -58,7 +58,11 @@ router.post('/', (req, res, next) => {
             });
         });
 });
-
+router.get('/submit', (req, res, next) => {
+    res.status(200).json({
+        message: "dasdad"
+    })
+})
 
 router.get('/:productId',(req,res,next) => {
     const id = req.params.productId

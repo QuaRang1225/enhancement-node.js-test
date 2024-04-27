@@ -9,6 +9,7 @@ const productRoutes = require('./api/routes/products')
 const ordersRoutes = require('./api/routes/orders')
 
 const pokemonRoutes = require('./Pokemon/routes/pokemons')
+const pokemonListRoutes = require('./Pokemon/routes/pokemonsList')
 const treeRoutes = require('./Pokemon/routes/evolutionTree')
 
 const morgan = require('morgan')
@@ -16,7 +17,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 mongoose.connect('mongodb+srv://dbduddnd1225:'+ process.env.MONGO_ATLAS_PW+ '@node-rest-shop.kxjks0n.mongodb.net/')
-//mongoose.Promise = global.Promise
+// mongoose.Promise = global.Promise
 // app.use((req,res,nest)=>{
     // res.header("Access-Control-Allow-Origin","*")
     // res.header(
@@ -49,7 +50,8 @@ app.use(bodyParser.json())
 app.use('/products',productRoutes)
 app.use('/orders',ordersRoutes)
 
-app.use('/pokemons',pokemonRoutes)
+app.use('/pokemon',pokemonRoutes)
+app.use('/pokemons',pokemonListRoutes)
 app.use('/tree',treeRoutes)
 
 //새로운 오류 객체를 생성
