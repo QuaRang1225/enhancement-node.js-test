@@ -1,10 +1,15 @@
+const { text } = require('body-parser')
 const mongoose = require('mongoose')
 
 const pokemonSchema = mongoose.Schema({
     _id : Number,
+    color:String,
+    base : {
+        types : [],
+        image : String
+    },
     capture_rate : Number,
-    dex_num : [],
-    dex_region : [],
+    dex : [], //num, region
     egg_group : [],
     evolution_tree : Number,
     forms_switchable : Boolean,
@@ -12,8 +17,10 @@ const pokemonSchema = mongoose.Schema({
     genra : String,
     hatch_counter : Number,
     name : String,
-    text_entries_text : [] ,
-    text_entries_version : [] ,
+    text_entries : {
+        text : [],
+        version : []
+    },
     varieites : []
 })
 

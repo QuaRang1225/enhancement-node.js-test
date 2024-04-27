@@ -14,7 +14,28 @@ router.get('/:pokemonId',(req,res,next) => {
         if (doc){
             res.status(200).json({
                 status : 200,
-                data:responseValue(doc),
+                data:{
+                    _id: doc._id,
+                    color:doc.color,
+                    base :{
+                        image : doc.base.image,
+                        types : doc.base.types,
+                    },
+                    capture_rate: doc.capture_rate,
+                    dex : doc.dex,
+                    egg_group: doc.egg_group,
+                    evolution_tree: doc.evolution_tree,
+                    forms_switchable: doc.forms_switchable,
+                    gender_rate: doc.gender_rate,
+                    genra: doc.genra,
+                    hatch_counter: doc.hatch_counter,
+                    name: doc.name,
+                    text_entries : {
+                        text: doc.text_entries.text,
+                        version: doc.text_entries.version,
+                    },
+                    varieites: doc.varieites
+                },
                 message : "정상적으로 포켓몬 정보를 조회했습니다."
             })
         }else{
@@ -52,20 +73,34 @@ router.get('/', (req, res, next) => {
                         current_page: page, // 현재 페이지 번호
                         per_page: perPage, // 페이지당 아이템 수
                         pokemon: docs.map(doc => {
-                            return responseValue(doc)
+                            return {
+                                _id : doc._id,
+                                color : doc.color,
+                                name : doc.name,
+                                base_image : doc.base_image,
+                                base_types : doc.base_types
+                            }
                         })
                     };
-                    res.status(200).json(response)
+                    res.status(200).json({
+                        status : 200,
+                        data : response,
+                        message :  "정상적으로 포켓몬 정보를 조회했습니다."
+                    })
                 })
                 .catch(err => {
-                    res.status(500).json({ error: err })
+                    res.status(500).json({
+                        status : 500,
+                        data : {},
+                        message : "포켓몬 정보 요청이 실패했습니다."
+                    })
                 })
         })
         .catch(err => {
             res.status(500).json({
                 status : 500,
                 data : {},
-                message : "데이터를 불러오는데 실패했습니다."
+                message : "포켓몬 정보 요청이 실패했습니다."
             })
         })
 })
@@ -155,30 +190,22 @@ router.delete("/:pokemonId",(req,res,next) => {
         })
     }) 
 })
-function responseValue(doc){
-    return {
-        _id: doc._id,
-        capture_rate: doc.capture_rate,
-        dex_num: doc.dex_num,
-        dex_region: doc.dex_region,
-        egg_group: doc.egg_group,
-        evolution_tree: doc.evolution_tree,
-        forms_switchable: doc.forms_switchable,
-        gender_rate: doc.gender_rate,
-        genra: doc.genra,
-        hatch_counter: doc.hatch_counter,
-        name: doc.name,
-        text_entries_text: doc.text_entries_text,
-        text_entries_version: doc.text_entries_version,
-        varieites: doc.varieites
-    }
-}
+// function responseValue(doc){
+//     return {
+       
+//     }
+// }
 function requestValue(req){
     return {
         _id: req.body._id,
+        color : req.body.color,
+        base :
+        {
+            types : req.body.base.types,
+            image : req.body.base.image
+        },
         capture_rate: req.body.capture_rate,
-        dex_num: req.body.dex_num,
-        dex_region: req.body.dex_region,
+        dex : req.body.dex,
         egg_group: req.body.egg_group,
         evolution_tree: req.body.evolution_tree,
         forms_switchable: req.body.forms_switchable,
@@ -186,8 +213,10 @@ function requestValue(req){
         genra: req.body.genra,
         hatch_counter: req.body.hatch_counter,
         name: req.body.name,
-        text_entries_text: req.body.text_entries_text,
-        text_entries_version: req.body.text_entries_version,
+        text_entries : {
+            text : req.body.text_entries.text,
+            version : req.body.text_entries.version
+        },
         varieites: req.body.varieites
     }
 }
