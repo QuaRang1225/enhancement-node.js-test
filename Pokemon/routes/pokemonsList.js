@@ -11,21 +11,27 @@ router.get('/', (req, res, next) => {
 
     const type1 = req.query.types_1 || ''
     const type2 = req.query.types_2 || ''
+    const query = req.query.query
     const perPage = 20 // 페이지당 아이템 수
 
 
-    let query = { "dex.region": region} // 기본 쿼리
-    if (type1 !== '' && type2 !== '') {
-        query["base.types"] = { $all: [type1, type2] }; // 두 가지 타입 모두를 포함하는 조건 추가
-    } else if (type1 !== '' || type2 !== '') {
-        query["base.types"] = { $in: [type1, type2] }; // 두 가지 타입 중 하나를 포함하는 조건 추가
+    let condition = { "dex.region": region} // 기본 쿼리
+    if (query !== '') {
+        // 부분 일치를 검색하는 정규 표현식 생성
+        const regex = new RegExp(query, 'i'); // 'i' 플래그는 대소문자 구분 없이 검색
+        condition["name"] = regex;
     }
-    
+    if (type1 !== '' && type2 !== '') {
+        condition["base.types"] = { $all: [type1, type2] }; // 두 가지 타입 모두를 포함하는 조건 추가
+    } else if (type1 !== '' || type2 !== '') {
+        condition["base.types"] = { $in: [type1, type2] }; // 두 가지 타입 중 하나를 포함하는 조건 추가
+    }
+
     Pokemon
         .countDocuments() // 전체 문서 수를 가져옴
         .then(totalCount => {
             Pokemon
-                .find(query)
+                .find(condition)
                 .skip((page - 1) * perPage) // 스킵할 아이템 수 계산
                 .limit(perPage) // 한 페이지에 반환할 아이템 수 제한
                 .exec()
