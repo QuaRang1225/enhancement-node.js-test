@@ -10,6 +10,7 @@ const ordersRoutes = require('./api/routes/orders')
 
 const pokemonRoutes = require('./Pokemon/routes/pokemons')
 const pokemonListRoutes = require('./Pokemon/routes/pokemonsList')
+const varieties = require('./Pokemon/routes/varieties')
 const treeRoutes = require('./Pokemon/routes/evolutionTree')
 
 const morgan = require('morgan')
@@ -52,6 +53,7 @@ app.use('/orders',ordersRoutes)
 
 app.use('/pokemon',pokemonRoutes)
 app.use('/pokemons',pokemonListRoutes)
+app.use('/varieties',varieties)
 app.use('/tree',treeRoutes)
 
 //새로운 오류 객체를 생성
