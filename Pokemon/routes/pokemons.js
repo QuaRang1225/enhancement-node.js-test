@@ -13,28 +13,7 @@ router.get('/:pokemonId',(req,res,next) => {
         if (doc){
             res.status(200).json({
                 status : 200,
-                data:{
-                    _id: doc._id,
-                    color:doc.color,
-                    base :{
-                        image : doc.base.image,
-                        types : doc.base.types,
-                    },
-                    capture_rate: doc.capture_rate,
-                    dex : doc.dex,
-                    egg_group: doc.egg_group,
-                    evolution_tree: doc.evolution_tree,
-                    forms_switchable: doc.forms_switchable,
-                    gender_rate: doc.gender_rate,
-                    genra: doc.genra,
-                    hatch_counter: doc.hatch_counter,
-                    name: doc.name,
-                    text_entries : {
-                        text: doc.text_entries.text,
-                        version: doc.text_entries.version,
-                    },
-                    varieites: doc.varieites
-                },
+                data:responseValue(doc),
                 message : "정상적으로 포켓몬 정보를 조회했습니다."
             })
         }else{
@@ -140,6 +119,30 @@ router.delete("/:pokemonId",(req,res,next) => {
     }) 
 })
 
+function responseValue(doc){
+    return {
+        _id: doc._id,
+        color:doc.color,
+        base :{
+            image : doc.base.image,
+            types : doc.base.types,
+        },
+        capture_rate: doc.capture_rate,
+        dex : doc.dex,
+        egg_group: doc.egg_group,
+        evolution_tree: doc.evolution_tree,
+        forms_switchable: doc.forms_switchable,
+        gender_rate: doc.gender_rate,
+        genra: doc.genra,
+        hatch_counter: doc.hatch_counter,
+        name: doc.name,
+        text_entries : {
+            text: doc.text_entries.text,
+            version: doc.text_entries.version,
+        },
+        varieites: doc.varieites
+    }
+}
 function requestValue(req){
     return {
         _id: req.body._id,

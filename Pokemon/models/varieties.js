@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const varietiesSchema = mongoose.Schema({
-    name : String,
+    _id : String,
     abilites : {
         is_hidden : [],
         name : [],
