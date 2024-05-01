@@ -47,8 +47,10 @@ router.get('/', (req, res, next) => {
                                 _id : doc._id,
                                 color : doc.color,
                                 name : doc.name,
-                                base_image : doc.base_image,
-                                base_types : doc.base_types
+                                base :{
+                                    types : doc.base.types,
+                                    image : doc.base.image
+                                }
                             }
                         })
                     };
