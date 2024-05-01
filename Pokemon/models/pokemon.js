@@ -20,7 +20,7 @@ const pokemonSchema = mongoose.Schema({
         text : [],
         version : []
     },
-    varieites : []
+    varieties : []
 })
 
 module.exports = mongoose.model('Pokemon',pokemonSchema)

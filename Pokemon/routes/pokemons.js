@@ -140,7 +140,7 @@ function responseValue(doc){
             text: doc.text_entries.text,
             version: doc.text_entries.version,
         },
-        varieites: doc.varieites
+        varieties: doc.varieties
     }
 }
 function requestValue(req){
@@ -165,7 +165,7 @@ function requestValue(req){
             text : req.body.text_entries.text,
             version : req.body.text_entries.version
         },
-        varieites: req.body.varieites
+        varieties: req.body.varieties
     }
 }
 
