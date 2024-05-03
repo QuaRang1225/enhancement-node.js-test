@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const evolutionSchema = mongoose.Schema({
     _id : Number,
     evol_to : [],
-    image : String,
+    image : [],
     name : String
 })
 
