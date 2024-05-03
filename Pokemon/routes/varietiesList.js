@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const mongoose = require('mongoose')
-const Pokemon = require('../models/varieties')
+const Varieties = require('../models/varieties')
 
 
 router.get('/', (req, res, next) => {
@@ -11,10 +11,10 @@ router.get('/', (req, res, next) => {
 
 
 
-    Pokemon
+    Varieties
         .countDocuments() // 전체 문서 수를 가져옴
         .then(totalCount => {
-            Pokemon
+            Varieties
                 .find()
                 .skip((page - 1) * perPage) // 스킵할 아이템 수 계산
                 .limit(perPage) // 한 페이지에 반환할 아이템 수 제한
@@ -54,5 +54,24 @@ router.get('/', (req, res, next) => {
             })
         })
 })
-
+router.delete("/",(req,res,next) => {
+    Varieties.deleteMany({})
+    .exec()
+    .then(result => {
+        if (result){
+            res.status(200).json({
+                status : 200,
+                data:{},
+                message : "정상적으로 모든 포켓몬 폼 정보를 삭제했습니다."
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            status : 500,
+            data : {},
+            message : "포켓몬 폼 삭제 요청이 실패했습니다."
+        })
+    }) 
+})
 module.exports = router
