@@ -13,6 +13,7 @@ const pokemonListRoutes = require('./Pokemon/routes/pokemonsList')
 const variety = require('./Pokemon/routes/varieties')
 const varietyListRoutes = require('./Pokemon/routes/varietiesList')
 const treeRoutes = require('./Pokemon/routes/evolutionTree')
+const treeListRoutes = require('./Pokemon/routes/evolutionTresList')
 
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
@@ -57,6 +58,7 @@ app.use('/pokemons',pokemonListRoutes)
 app.use('/variety',variety)
 app.use('/varieties',varietyListRoutes)
 app.use('/tree',treeRoutes)
+app.use('/trees',treeListRoutes)
 
 //새로운 오류 객체를 생성
 //이 오류는 "Not found" 메시지를 가지고 있으며, 404 상태 코드로 설정
