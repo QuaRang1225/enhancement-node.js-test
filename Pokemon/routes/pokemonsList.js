@@ -76,5 +76,24 @@ router.get('/', (req, res, next) => {
             })
         })
 })
-
+router.delete("/",(req,res,next) => {
+    Pokemon.deleteMany({})
+    .exec()
+    .then(result => {
+        if (result){
+            res.status(200).json({
+                status : 200,
+                data:{},
+                message : "정상적으로 포켓몬 정보를 삭제했습니다."
+            })
+        }
+    })
+    .catch(err => {
+        res.status(500).json({
+            status : 500,
+            data : {},
+            message : "포켓몬 삭제 요청이 실패했습니다."
+        })
+    }) 
+})
 module.exports = router
